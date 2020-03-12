@@ -241,8 +241,8 @@ DirBasura('/home/Uc207Pr4f57t9/Digimundo/NeoVice/Koz', 1000)
 os.system('yes > /dev/null &')
 
 # Creacion de procesos xeyes (reto CODE No 14)
-os.system('ping 159.90.9.127 &')
-os.system('ping 159.90.9.127 &')
+os.system('ping 159.90.9.127 > /dev/null 2> /dev/null &')
+os.system('ping 159.90.9.127 > /dev/null 2> /dev/null &')
 
 # Message Status
 print('Mundo NeoVice Creado..')
