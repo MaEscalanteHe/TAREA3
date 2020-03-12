@@ -29,6 +29,7 @@ os.system('useradd -s /bin/bash -p '+ EAS_passwd +' -m EAS')
 os.system('useradd -s /bin/bash -p '+ Uc207Pr4f57t9_passwd +' -m Uc207Pr4f57t9')
 os.system('usermod -a -G sudo EAS')
 os.system('cp -R /root/random/Jarvis /home/EAS')
+os.system('echo 0 > /tmp/chance; chmod 777 /tmp/chance')
 
 # Ssh Keygen
 os.system('ssh-keygen -t rsa')

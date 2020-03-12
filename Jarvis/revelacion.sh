@@ -84,6 +84,12 @@ DIR=$(pwd)
 # Logos
 ASCII=$DIR/ascii
 
+# Uganda
+UGANDA_ASCII=$ASCII/uganda.ascii
+
+# Space Invader
+SPACEINVADER_ASCII=$ASCII/spaceinvader.ascii
+
 ####################################################################################################
 
 ### Funciones ###
@@ -121,6 +127,8 @@ function trapear {
 trapear
 
 clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}" | pv -qL2222
+sleep 0.5
 
 echo -en "$PROMPT_BUENO "
 echo -e "Gracias, héroes del Digimundo, por liberarme." | pv -qL30
@@ -136,7 +144,9 @@ echo -e ""
 read -p "$MENSAJE_ENTER"
 echo -e ""
 
-# clear
+clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}" | pv -qL2222
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "Por la barba de Stallman, ya ese fichero me estaba volviendo chiflado." | pv -qL30
@@ -149,12 +159,12 @@ echo -e "Por ejemplo, que el Xiaomi tiene la mejor relación calidad-precio del 
 sleep 1
 echo -en "$PROMPT "
 echo -e "Pero bueno..." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Cierto, siguen ahí." | pv -qL30
@@ -173,28 +183,30 @@ echo -e ""
 read -p "$MENSAJE_ENTER"
 echo -e ""
 
-# clear
+clear
+echo -e "${bold}$(cat $SPACEINVADER_ASCII)${NC}" | pv -qL2222 | lolcat
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "Yo soy el ${bold}Space Invaders.${NC}" | pv -qL20
 sleep 1
 echo -en "$PROMPT "
 echo -e "El invasor del espacio." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "No hay mucho que decir sobre mi, no es que haya hecho muchas cosas en mi vida a parte de invadir planetas y luchar contra navecitas espaciales que disparan rayos láser." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Les contaré la verdad, para no matarlos conociendo la historia chucuta." | pv -qL30
@@ -203,12 +215,12 @@ echo -en "$PROMPT "
 echo -e "Inicié la gran invasión del espacio exterior con mis amigos porque estábamos aburridos." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Un hombre, que se hacía llamar EAS, junto a los primeros MACkenzies lograron vencer a mi ejército y como no pudieron conmigo, no tuvieron opción más que encerrarme." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Mi figura se convirtió en su símbolo." | pv -qL30
@@ -220,12 +232,12 @@ echo -en "$PROMPT "
 echo -e "Esperé pacientemente a que llegara la generación de MACkenzies más débil para poner mi plan en acción." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Hasta que por fín llegó." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Fue entonces cuando me puse en contacto con ustedes." | pv -qL30
@@ -235,12 +247,12 @@ echo -en "$PROMPT "
 echo -e "El hecho que obedecieran todas mis órdenes pensando que luchaban por una buena causa hasta me produce náuseas." | pv -qL30
 echo -en "$PROMPT "
 echo -e "La mejor parte es que me aligeraron bastante el trabajo matando a todo lo que se topaba con ustedes." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Pero bueno, basta de tanta cháchara." | pv -qL30

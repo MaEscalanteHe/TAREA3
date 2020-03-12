@@ -58,6 +58,9 @@ GROUPNAME=$2
 
 ### Mensajes Reutilizables ###
 
+# Unknow
+PROMPT_BUG=$(echo -e "${GREEN_R}EAS${NC}${CYAN_R}@${NC}${RED_R}haqrejbeyq${NC}:${CYAN_R}~${NC}\$")
+
 # EAS
 PROMPT=$(echo -e "${GREEN_R}EAS${NC}${CYAN_R}@${NC}${RED_R}underworld${NC}:${CYAN_R}~${NC}\$")
 
@@ -86,6 +89,9 @@ CABALLERO_ASCII=$ASCII/caballero.ascii
 
 # maga.ascii
 MAGA_ASCII=$ASCII/maga.ascii
+
+# Uganda
+UGANDA_ASCII=$ASCII/uganda.ascii
 
 ####################################################################################################
 
@@ -125,24 +131,26 @@ trapear
 
 clear
 
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "¡Excelente!" | pv -qL30
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "No me equivoque al traerlos aqui." | pv -qL30
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "Bienvenidos al Digimundo, héroes virtuales." | pv -qL30
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "Ahora se encuentran en la mágica dimensión de las estructuras de control y los strings arbitrarios." | pv -qL30
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "Pero no todo es tan bueno como parece." | pv -qL30
-echo -en "$PROMPT "
+echo -en "$PROMPT_BUG "
 echo -e "Primero, permítanme presentarme:" | pv -qL30
 sleep 3
 echo -e ""
 read -p "$MENSAJE_ENTER"
 echo -e ""
 
-# clear
+clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}" | pv -qL2222
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "Yo soy EAS, amo y señor de estas tierras." | pv -qL30
@@ -152,12 +160,12 @@ echo -en "$PROMPT "
 echo -e "Gran maestro de las artes de programación." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Y todo lo que sigue de mi currículo..." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 
 echo -en "$PROMPT "
@@ -166,23 +174,23 @@ echo -en "$PROMPT "
 echo -e "Fui yo quien desarrolló y compiló este mundo y mató al proceso conocido como la ${bold}'gran invasión del espacio exterior'${NC}" | pv -qL30
 echo -en "$PROMPT "
 echo -e "La vez que casi fuimos aniquilados por extraterrestres que venían con ganas de pasarla bien." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "También fundé algo de lo que hoy me arrepiento, la civilización MACkenzie." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Un grupo de jóvenes tarados que no hacen nada bien." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Aún por todo lo que hice, mis malagradecidos subordinados decidieron capturarme en un script, invocando una función que atrapa a la señal más poderosa de todas: ${bold}La SIGSTARGRIAL.${NC}" | pv -qL30
@@ -193,7 +201,9 @@ echo -e ""
 read -p "$MENSAJE_ENTER"
 echo -e ""
 
-# clear
+clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}"
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "Usé las pocas energías que me quedaban para traerlos aquí y ahora les pido que me liberen." | pv -qL30
@@ -203,12 +213,12 @@ echo -en "$PROMPT "
 echo -e "Consideren que el acceso a algunas regiones está condicionado." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Cuando acaben con los MACfighters, el camino hacia mi ubicación secreta será revelado." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Confío en sus habilidades de ${bold}GNU/LINUX${NC} para defenderse de los peligros que habitan estas tierras." | pv -qL30
@@ -224,15 +234,15 @@ sleep 2
 echo -e "$RED$(cat $MAGA_ASCII)$NC" | pv -qL2222
 echo -en "$PROMPT "
 echo -e "${RED}La Maga:${NC} una hechicera llena de trucos bajo la manga, capaz de restablecer limitadas veces la energía vital del equipo y brindar pistas para la resolución de los acertijos que encontrarán en su odisea." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
-echo -e "Para poder vencer a los enemigos, deberan atacarlos desde la ${bold}TTY2${NC}${YELLOW}[Todavía no te cambies de TTY]${NC}, un subespacio conectado a mi mundo donde podran sacar a relucir sus principales poderes: ${bold}Los Comandos.${NC}" | pv -qL30
+echo -e "Para poder vencer a los enemigos, deberan atacarlos desde la ${bold}TTY2${NC} ${YELLOW}[Todavía no te cambies de TTY]${NC}, un subespacio conectado a mi mundo donde podran sacar a relucir sus principales poderes: ${bold}Los Comandos.${NC}" | pv -qL30
 echo -en "$PROMPT "
 echo -e "Sin embargo, para que hagan efecto deben usar un comando especial: ${bold}'attack'${NC} antes de sus comandos." | pv -qL30
 echo -en "$PROMPT "
@@ -277,23 +287,23 @@ echo -en "$PROMPT "
 echo -e "Si pierden toda su vida, tendran que recorrer el mundo de nuevo." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Tengan mucho cuidado." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "Si deciden que un enemigo es mas poderoso que ustedes, podran huir del combate, pero eso les costara vida, asi que piensenlo bien." | pv -qL30
 echo -en "$PROMPT "
 echo -e "Ademas, para avanzar por los mundos deberan vencer a los jefes de la zona actual, así que el enfrentamiento es obligatorio." | pv -qL30
-sleep 2
-echo -e ""
-read -p "$MENSAJE_ENTER"
-echo -e ""
+# sleep 2
+# echo -e ""
+# read -p "$MENSAJE_ENTER"
+# echo -e ""
 
-# clear
+# # clear
 
 echo -en "$PROMPT "
 echo -e "¡Eso es todo por ahora heroes!" | pv -qL30

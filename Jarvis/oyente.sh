@@ -81,6 +81,9 @@ DIR=$(pwd)
 # Logos
 ASCII=$DIR/ascii
 
+# Uganda
+UGANDA_ASCII=$ASCII/uganda.ascii
+
 ####################################################################################################
 
 ### Funciones ###
@@ -133,6 +136,8 @@ CODE_NEOVICE="Kernel Panic"
 trapear
 
 clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}" | pv -qL2222
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "Si necesitas llamarme para darme un código de un mundo, ejecuta ${bold}'Zumbido'${NC}" | pv -qL30
@@ -145,6 +150,8 @@ done
 COMMAND=""
 
 clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}"
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "${bold}¡¿Conseguiste derrotar a un MACFighter?!${NC} Si es asi, dame el código del mundo que decidiste desbloquear:" | pv -qL30

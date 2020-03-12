@@ -54,13 +54,13 @@ if [ "$1" != "help" ] && [ "$1" != "monsters" ] && [ "$1" != "all-monsters" ]; t
 elif [ "$1" = "monsters" ]; then
   read -p "monster> " COMMAND
 elif [ "$1" = "all-monsters" ]; then
-  echo "1" > chance
+  echo "1" > /tmp/chance
 fi
 
 # Chance
-chance=`cat chance`
+chance=`cat /tmp/chance`
 
-#exec 2> /dev/null	# Ignorar todos los errores
+# exec 2> /dev/null	# Ignorar todos los errores
 
 # Verificamos que el mounstruo y el mundo actual coincidan.
 enemy=`echo $1 | grep "froggit\|vegetoid\|whimsum\|aaron\|LG"`
@@ -714,7 +714,7 @@ if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
   # Mostramos los resultados
   if [ "$RESULT" = "$ANSWER" ]; then
     echo $code
-    echo "0" > chance
+    echo "0" > /tmp/chance
   elif [ -z "$NO_MONSTER" ]; then
     newFalseCode
     # Nos aseguramos que el codigo falso no sea igual al verdadero.
@@ -725,7 +725,7 @@ if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
     done
     
     echo $falseCode
-    echo "0" > chance
+    echo "0" > /tmp/chance
   elif [ -z "$HELP" ]; then
     echo "El monstruo indicado no existe."
   fi
@@ -733,8 +733,9 @@ if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
 
 # Si el numero de argumentos no es 1, error.
 elif [ $# != 1 ]; then
-  echo "Numero de argumentos invalidos.
-  Sintaxis:  attack <MONSTER|monsters|all-monsters|help>"
+  echo "Numero de argumentos invalidos."
+  echo "Sintaxis:  attack <MONSTER>"
+
 elif [ -z "$world" ]; then
   echo "El mundo actual no coincide con el enemigo. Asegurate de estar en el directorio correcto."
 else 
