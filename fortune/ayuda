@@ -1,0 +1,47 @@
+%
+mr.robot@pc:\$ Recuerda que puedes colocar los flags seguidos EJ: ls -Alh
+%
+mr.robot@pc:\$ Si quieres saber la ubicacion de "algo" Puedes usar which o find (depende de lo que quieras)
+%
+mr.robot@pc:\$  * = Cero o mas caracteres [REGEX]
+%
+mr.robot@pc:\$ ? = uno y solo un caracter [REGEX]
+%
+mr.robot@pc:\$ !<valor> = Negado del valor
+%
+mr.robot@pc:\$ recuerda la permisologia: RWX | read write execute
+%
+mr.robot@pc:\$ El man te ayudara mas que yo
+%
+mr.robot@pc:\$ has intentado hacer man del man?
+%
+mr.robot@pc:\$ esto "--" te salvara la vida
+%
+mr.robot@pc:\$ recuerda usar la tuberias | 
+%
+mr.robot@pc:\$ los redireccionacionamientos seran primordial en muchos retos
+%
+mr.robot@pc:\$ "2>" adios errores
+%
+mr.robot@pc:\$ "&&" filtra que el resultado anterior se halla realizado correctamente
+%
+mr.robot@pc:\$ para ver las variables de ambiente presiona env
+%
+mr.robot@pc:\$ no pierdas tiempo preguntandome, el tiempo corre..
+%
+mr.robot@pc:\$ debiste hacer los retos de la tarea 3
+%
+mr.robot@pc:\$ lee todos los flag del comando que vayas a usar, alli estara la respuesta
+%
+mr.robot@pc:\$ existen diversas maneras de realizar un reto, se creativo
+%
+mr.robot@pc:\$ En serio todos los retos es cuestion de saber buscar en el man
+%
+mr.robot@pc:\$ los comandos son tus armas, los flags tus balas, los comodines tus manos
+%
+mr.robot@pc:\$ Estudia, de inteligencia no te vas a morir
+%
+mr.robot@pc:\$ no uses comandos rebuscados, solo los flags correctos de los basicos
+%
+mr.robot@pc:\$ todos los retos se hacen con los comandos de la tarea
+

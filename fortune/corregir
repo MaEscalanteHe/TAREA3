@@ -1,0 +1,18 @@
+# CODENo 3:Sabemos que hay varios archivos que terminan con log y estan a
+# exactamente 2 directorios de profundidad en este mundo (ElYiano), encuentre dicho archivo
+
+#CODENo 8: ”Muestrame del archivo UNDYNE la linea 90" - output esperado: ANACO_JP
+
+#CODENo 9: Contar el numero de lineas en el archivo FILE1 que no aparecen en el archivo FILE2
+
+#CODENo 10: arreglar para meter los archivos entro de DIR
+
+#CODENo 15: arreglar el archivo FILE por FLOWY
+
+#CODENo 16: arreglar el archivo FILE por TORIEL, Corregir respuesta, al sort agregarle -g
+
+#CODENo 18: Cambiar DIR1 y DIR2 por CUP y HEAD
+
+#CODENo 25: Eliminar reto relacionado a jobs, pues no se pueden mover jobs entre terminales. 
+
+#CODENo 19: Corregir respuesta y sincronizar con pregunta

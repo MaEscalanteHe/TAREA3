@@ -1,0 +1,165 @@
+#!/bin/bash
+
+#<< EOF
+# Atrapamos todas lor intentos de cancelar el script
+    trap "" SIGHUP
+    trap "" SIGINT
+    trap "" SIGQUIT
+    trap "" SIGILL
+    trap "" SIGTRAP
+    trap "" SIGABRT
+    trap "" SIGBUS
+    trap "" SIGFPE
+    trap "" SIGUSR1
+    trap "" SIGSEGV
+    trap "" SIGUSR2
+    trap "" SIGPIPE
+    trap "" SIGALRM
+    trap "" SIGTERM
+    trap "" SIGSTOP
+    trap "" SIGTSTP
+#EOF
+
+# MENSAJES
+    # Inicio
+    I="¿Han sentido alguna vez que nacieron en el mundo equivocado?"
+
+    # Retos
+    R1="¿Cual es el valor de la variable DIGIMUNDO?"
+    R2="¿Cuantas lineas tiene el archivo .MAC?"
+    R3="Liste detalladamente los archivos, incluyendo los ocultos."
+
+    # Monologo
+    M1="Con sus habilidades, el mundo debe ser aburrido."
+    M2="¿Que piensan de el? ¿Es interesante? ¿Les gusta?"
+    M3="¿Que pasaria si existiera un mundo donde la fantasia y la realidad fueran indistinguibles?"
+    M4="Un mundo donde los objetivos y las reglas son claros ¿Les gustaria ir? [N/y]"
+
+    # Decepcion
+    D1="Que decepcion..."
+    D2="Pense que habia encontrado a los elegidos."
+    D3="Sin embargo, aun no me doy por vencido."
+    D4="Si cambian de opinion, simplemente escriban 'MAC'."
+
+    # Respuesta
+    R="Excelente decision! Entonces cumplire sus deseos y los enviare a mi mundo: El Digimundo. Solo necesitan ejecutar 'Aschente'"
+
+# PRIMER RETO
+    clear
+    for t in "$I"; do pv -qL12 <<<$t; done
+    read
+
+    # Mostramos el reto
+    clear
+    for t in "$R1"; do pv -qL12 <<<$t; done
+
+    # Variable que indica si la respuesta es correcta
+    ANSWER="-1"
+
+    # Variable DIGIMUNDO
+    DIGIMUNDO="El mundo virtual"
+
+    # Eliminamos el directorio PRueBA en caso de que exista
+    rm -rf PRueBA
+
+    while [ "$RESULT" != "$ANSWER" ]; do
+        # Creamos el directorio de prueba
+        mkdir PRueBA
+        cd PRueBA
+        touch {.,a,b,c}{1,2,3,4}{MAC,GIA}
+
+        read -p "command> " COMMAND
+        COMMAND=$COMMAND" 2> /dev/null"
+        eval RESULT=\`${COMMAND}\`
+        ANSWER=`echo $DIGIMUNDO`
+
+        cd ..
+        rm -rf PRueBA
+    done
+
+
+# SEGUNDO RETO
+    # Mostramos el reto
+    clear
+    for t in "$R2"; do pv -qL12 <<<$t; done
+
+    # Variable que indica si la respuesta es correcta
+    ANSWER1="-1"
+    ANSWER2="-1"
+    RESULT="0"
+
+    # Eliminamos el directorio PRueBA en caso de que exista
+    rm -rf PRueBA
+
+    while [ "$RESULT" != "$ANSWER1" ] && [ "$RESULT" != "$ANSWER2" ]; do
+        # Creamos el directorio de prueba
+        mkdir PRueBA
+        cd PRueBA
+        touch {.,a,b,c}{1,2,3,4}{MAC,GIA}
+
+        # Creamos el archivo .MAC
+        echo -e "La\nmejor\nagrupacion\nde\ntodas." > .MAC
+
+        read -p "command> " COMMAND
+        COMMAND=$COMMAND" 2> /dev/null"
+        eval RESULT=\`${COMMAND}\`
+
+        # Respuestas correctas.
+        ANSWER1=`wc -l .MAC`
+        ANSWER2=`cat .MAC | wc -l`
+
+        cd ..
+        rm -rf PRueBA
+    done
+
+
+# TERCER RETO
+    # Mostramos el reto
+    clear
+    for t in "$R3"; do pv -qL12 <<<$t; done
+
+    # Variable que indica si la respuesta es correcta
+    ANSWER="-1"
+
+    # Eliminamos el directorio PRueBA en caso de que exista
+    rm -rf PRueBA
+
+    while [ "$RESULT" != "$ANSWER" ]; do
+        # Creamos el directorio de prueba
+        mkdir PRueBA
+        cd PRueBA
+        touch {.,a,b,c}{1,2,3,4}{MAC,GIA}
+
+        read -p "command> " COMMAND
+        COMMAND=$COMMAND" 2> /dev/null"
+        eval RESULT=\`${COMMAND}\`
+        ANSWER=`ls -la`
+
+        cd ..
+        rm -rf PRueBA
+    done
+    clear
+    sleep 3
+
+# MONOLOGO
+    for t in "$M1" "$M2" "$M3" "$M4"; do pv -qL12 <<<$t; sleep 2; done
+    read ANSWER
+    clear
+
+    if [ "$ANSWER" != "y" ]; then
+        for t in "$D1" "$D2" "$D3" "$D4"; do pv -qL12 <<<$t; sleep 1; done
+        clear
+
+        while [ "$ANSWER" != "MAC" ]; do
+            read  ANSWER
+            clear
+        done
+    fi
+
+    clear
+    for t in "$R"; do pv -qL12 <<<$t; sleep 1; done
+
+# ASCHENTE
+    while [ "$ANSWER" != "Aschente" ]; do
+        read  ANSWER
+    done

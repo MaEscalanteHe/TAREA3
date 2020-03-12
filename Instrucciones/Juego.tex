@@ -1,0 +1,404 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[english,activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{bookman}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[pdftex=true,colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\date{}
+
+
+
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\includegraphics[scale=0.25]{USB.jpeg}~\\[1cm]
+
+\textsc{\LARGE Universidad Simón Bolívar}\\[1.5cm]
+\textsc{\Large Mantenimiento de Aulas Computarizadas}\\[0.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Admisión Enero-Marzo 2020\\[0.4cm] }
+\textsc{Tarea 3 - Juego}\\[0.1cm]
+
+\HRule \\[0.75cm]
+\begin{center} \large 
+\includegraphics[scale=0.25]{spaceinvader.jpg}~\\[1cm]
+\emph{Hecho por:}\\
+Amin Arriaga - aminlorenzo.14@gmail.com\\ 
+\end{center}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\end{flushright}
+\end{minipage}
+
+\vfill
+{\large \today}
+\end{center}
+\end{titlepage}
+
+
+\newpage
+
+\setlength\parindent{24pt}
+\clearpage
+
+\section{Introducci\'on}
+	\hspace{1cm} El juego se desarrolla en \textbf{/home/Uc207Pr4f57t9} (se uso ese nombre de usuario para evitar que coloquen expl\'icitamente el nombre del usuario en vez de \$(whoami) ), donde se encuentra el digimundo, el cual se divide en:
+	\begin{enumerate}
+		\item /home/Uc207Pr4f57t9/digimundo/ElYiano/
+		\item /home/Uc207Pr4f57t9/digimundo/Magicant/
+		\item /home/Uc207Pr4f57t9/digimundo/LaPuta/
+		\item /home/Uc207Pr4f57t9/digimundo/Konohagakure/
+		\item /home/Uc207Pr4f57t9/digimundo/NeoVice/
+	\end{enumerate}
+	
+
+\section{Zonas}
+	\hspace{1cm} Son los directorios donde se desarrolla el juego. A diferencia de los juegos anteriores donde el recorrido de las zonas era completamente lineal, en este los prenuevos van a tener cierto de grado de elecci\'on al desbloquear zonas.
+	\begin{itemize}
+		\item \textbf{ElYiano} (Llano) - Primera zona del digimundo, se necesita completar salaA para llegar hasta aca. Cuenta con 5 retos f\'aciles. Cuando los prenuevos vencen a LG, podr\'an elegir si ir a Magicant, LaPuta o a Konohagakure. Despues de elegir a cual mundo quieren ir, aparecer\'a un portal correspondiente (esto ocurrira cada vez que desbloqueen un nuevo mundo).
+		
+		\item \textbf{Magicant} (Mundo magico) - Cuenta con 3 retos f\'aciles y 2 intermedios. Cuando los prenuevos vencen a SV, podr\a'n elegir si ir a LaPuta o a Konohagakure en caso de que a\'un no hayan ido.
+		
+		\item \textbf{LaPuta} (Castillo flotante) - Cuenta con 2 retos f\'aciles y 3 intermedios. Cuando los prenuevos vencen a JO, podr\a'n elegir si ir a Magicant o a Konohagakure en caso de que a\'un no hayan ido.
+		
+		\item \textbf{Konohagakure} (Aldea ninja) - Cuenta con 2 retos f\'aciles, 2 intermedios y 1 dif\'icil. Cuando los prenuevos vencen a AL, podr\a'n elegir si ir a Magicant o a LaPuta en caso de que a\'un no hayan ido.
+		
+		\item \textbf{NeoVice} (Ciudad futurista) - Para entrar aca, los prenuevos deber\'an haber pasado al menos 2 de las 3 zonas anteriores. Cuenta con 1 reto f\'acil, 2 intermedios y 2 dif\'icles. Cuando los prenuevos vencen a JK, podr\'an ir al kernel.
+		
+		\item \textbf{kernel} (N\'ucleo del digimundo) - Aq\'i se encuentra el Space Invader. Para poder enfrentarlo, los prenuevos deber\'an luchar contra todos y cada unos de los monstruos anteriores.
+	\end{itemize}
+	
+	\hspace{0.4cm} Los prenuevos podran regresarse a los mundos que ya descubrieron libremente.
+	
+\section{Preparaciones}
+	\hspace{0.4cm} Antes de iniciar el juego, recuerden ejecutar en la tty1:
+	\begin{enumerate}
+		\item \textbf{sudo genPrueba.py}
+		\item \textbf{sudo prueba.py}
+		\item \textbf{su EAS}
+		\item \textbf{Yarbis.sh}
+		
+	\end{enumerate}
+	
+	
+\section{Escena de Batalla}
+	\hspace{1cm}\textbf{(Unity)} Al moverse por los mundo, se generar\'an batallas aleatoria (tipo hierba alta de pokemon), iniciando una escena de batalla basada en las de Undertale. Una vez en la escena, compuesta por un sprite de un enemigo, un cuadro con la descripci\'on del reto y un menu con las opciones "Attack", "Special" y "Run", los prenuevos podr\'an tomar la opci\'on que ellos quieran. Si elijen "Attack", el archivo "chance" sera sobreescrito por unity, dandole la oportunidad a los prenuevos de atacar; adem\'as en unity aparecer\'a un prompt para que puedan escribir el c\'odigo. \textbf{(tty)} Para obtener el codigo, los prenuevos deber\'an moverse a la tty correspondiente del juego, alli podr\'an probar los comandos hasta que ellos crean tener la respuesta correcta, en ese caso, ejecutar\'an
+	\begin{center}
+		\$ attack MONSTER\_ID
+	\end{center}	
+	\hspace{0.4cm} Siendo MONSTER\_ID, un identificador del monstruo. Si chance tiene el valor 0, se le avisara al prenuevo que no tiene a nadie a quien atacar. Si chance tiene el valor 1 y el comando es incorrecto, el script retornara un codigo aleatorio; y si es correcto, retornara el codigo correspondiente al monstruo. \textbf{(Unity)} si colocan un codigo incorrecto en el prompt, el monstruo les quitara vida y regresaran al menu inicial de la escena de batalla. Si colocan un codigo correcto, venceran al monstruo y regresaran al mundo, finalizando la escena de batalla. Si los prenuevos eligen la opcion de huir, perderan vida (menos que atacando incorrectamente) y regresaran al mundo. Si los prenuevos eligen "Special", aparecera un submenu con tres opciones:
+	\begin{itemize}
+		\item \textbf{Bloquear:} Les permite atacar sin perder vida. Si huyen despues de bloquear, perderan el mana gastado.
+		\item \textbf{Curar:} Cura.
+		\item \textbf{Clarividencia:} Les da una pista del comando.
+	\end{itemize}	 
+	\hspace{0.4cm} Los 3 especiales cuestan mana. Si la barra de vida llega a 0, la escena se oscurece y aparecen en ElYiano (con la barra de vida llena, la de mana no se llena nunca).
+	
+	
+	
+\section{Prologo}
+	\textbf{(tty1)} Luego de ejecutar el Yarbis, verificar que el usuario/tty son correctos, y copiar el PID del proceso, aparecera el mensaje: \\
+	
+	\hspace{-1cm}\textit{"¿Estan listos para el reto?"}\\
+	
+	En este punto ya deben entregarle la computadora a los prenuevos y que comience el juego. Los prenuevos deberan presionar enter. Luego de eso aparecera el siguiente mensaje:\\
+	
+	\hspace{-1cm}\textit{"Pero antes, necesito saber que son dignos de la aventura que se aproxima. Por lo tanto, necesito que resuelvan los siguientes retos."}\\
+	
+	Despues de eso, a los prenuevos le apareceran 3 retos faciles seguidos. Recuerden que, como estan dentro de un script, no hay man ni nada por el estilo. Los 3 retos son:\\
+	
+	\begin{enumerate}
+		\item \textit{"¿Cual es el valor de la variable DIGIMUNDO?"}
+		\item \textit{"¿Cuantas lineas tiene el archivo .MAC?"}
+		\item \textit{"Liste detalladamente los archivos, incluyendo los ocultos."}		
+	\end{enumerate}
+	
+	Luego de que los prenuevos resuelvan los retos apareceran los siguientes mensajes:\\
+	
+	\hspace{-1cm}\textit{"Excelente! No me equivoque al traerlos aqui. Bienvenidos al Digimundo, héroes virtuales. Ahora se encuentran en la mágica dimensión de las estructuras de control y los strings arbitrarios. Pero no todo es tan bueno como parece. Primero, permítanme presentarme:"\\}
+	
+	\hspace{-1cm}\textit{"Yo soy EAS, amo y señor de estas tierras. Eterno comandante de legiones. Gran maestro de las artes de programación. Y todo lo que sigue de mi currículo…"\\}
+	
+	\hspace{-1cm}\textit{"Mi fama me precede: fui yo quien desarrolló y compiló este mundo y mató al proceso conocido como la ”gran invasión del espacio exterior”; la vez que casi fuimos aniquilados por extraterrestres que venían con ganas de pasarla bien."\\}
+	
+	\hspace{-1cm}\textit{"También fundé algo de lo que hoy me arrepiento, la civilización MACkenzie: un grupo de jóvenes tarados que no hacen nada bien. Aún por todo lo que hice, mis malagradecidos subordinados decidieron capturarme en un script, invocando una función que atrapa a la señal más poderosa de todas: la SIGSTARGRIAL. El mal que se apoderó de sus corazones ahora reina en nuestro mundo."\\}
+	
+	\hspace{-1cm}\textit{"Usé las pocas energías que me quedaban para traerlos aquí y ahora les pido que me liberen. Pero para cumplir esa tarea, primero deben neutralizar a los MACkenzies más fuertes, los MACfighters, quienes custodian cuatro regiones de este mundo. Consideren que el acceso a algunas regiones está condicionado. Cuando acaben con los MACfighters, el camino hacia mi ubicación secreta será revelado."\\}
+	
+	\hspace{-1cm}\textit{"Confío en sus habilidades de GNU/LINUX para defenderse de los peligros que habitan estas tierras. También les conferiré cuerpos más fuertes y resistentes para equilibrar las cosas. Sus avatares serán: El caballero: un valiente defensor de la verdad y la justicia, capaz de mermar el daño causado por un ataque enemigo en cada combate. Y la maga: una hechicera llena de trucos bajo la manga, capaz de restablecer limitadas veces la energía vital del equipo y brindar pistas para la resolución de los acertijos que encontrarán en su odisea."\\}
+	
+	\hspace{-1cm}\textit{"Para poder vencer a los enemigos, deberan atacarlos desde la tty2, un subespacio conectado a mi mundo donde podran sacar a relucir sus principales poderes: Los comandos. Sin embargo, para que hagan efecto deben usar un comando especial: 'attack' antes de sus comandos. Vamos a practicar un poco, ejecuten 'attack 0'."\\}
+	
+	Los prenuevos deberan escribir "attack 0". Si no lo hacen, aparecera:\\
+	
+	\hspace{-1cm}\textit{"Escribiste mal el comando... Si no escribes bien, tendras muchos problemas en el futuro. Intentalo otra vez."\\}
+	
+	Cuando lo hagan correctamente, aparecera:\\
+	
+	\hspace{-1cm}\textit{"Bien! Asi podran atacar al monstruo con identificador 0. Ahora ejecuten 'ls'."\\}
+	
+	Los prenuevos deberan escribir "ls". Si no lo hacen, aparecera:\\
+	
+	\hspace{-1cm}\textit{"Escribiste mal 'ls'? Tal vez me equivoque en elegirlos... Bueno no importa, intentenlo de nuevo:"\\}
+	
+	Cuando lo hagan correctamente, aparecera:\\
+	
+	\hspace{-1cm}\textit{"Excelente! De esta forma se usa el comando attack, recuerden verificar el ID del monstruo antes de atacarlo. Luego de atacar, se les dara un codigo el cual les permitira destruir al enemigo. Sin embargo, si el comando usado luego de attack es incorrecto, el codigo tambien lo sera. Esto le dara una oportunidad al monstruo de atacarlos a ustedes y perderan vida. Si pierden toda su vida, tendran que recorrer el mundo de nuevo. Tengan mucho cuidado."\\}
+	
+	\hspace{-1cm}\textit{"Tambien tienen poderes especiales. El caballero puede bloquear ataques, lo que les permitira atacar sin miedo a equivocarse y perder vida. La maga puede curar vida y usar clarividencia, los que les ayudara a resolver sus problemas. Todo esto cuesta mana, la cual no se puede recuperar de ninguna forma, asi que usenla con prudencia."\\}
+	
+	\hspace{-1cm}\textit{"Si deciden que un enemigo es mas poderoso que ustedes, podran huir del combate, pero eso les costara vida, asi que pienselo bien. Ademas, para avanzar por los mundos deberan vencer a los jefes de la zona actual, asi que el enfrentamiento es obligatorio. Cuando derroten a un MACfigther, regresen a esta tty (tty1) y denme el codigo del nuevo mundo al que entren, esto me permitira desbloquearles nuevos mundos en el tty2."\\}
+	
+	\hspace{-1cm}\textit{"Eso es todo por ahora heroes! Cuento con ustedes, mi última esperanza. Ya no me quedan suficientes fuerzas para seguir hablándoles, así que a partir de ahora estarán solos. No me fallen..."\\}
+	
+	Al finalizar el prologo, los prenuevos seran enviados a la grafica \textbf{(Unity)}.
+	
+	\subsection{Respuestas}
+		\begin{itemize}
+			\item Mostrar el contenido de la variable DIGIMUNDO\\
+				\$ echo \$DIGIMUNDO
+			\item Contar el n\'umero de lineas del archivo .MAC\\
+				\$ wc -l .MAC
+				\$ cat .MAC | wc -l
+			\item Listar los archivos incluyendo los ocultos\\
+				\$ ls -la
+		\end{itemize}	 
+	
+	
+\section{ElYiano}	
+	\textbf{(Unity)} Los prenuevos aparecer\'an en ElYiano, junto al siguiente dialogo:\\
+	
+	\hspace{-1cm}\textit{\textbf{Maga:} 'Estoy escuchando... voces. Creo que mis poderes de clarividencia se estan activando, y me dicen que "Para moverte utiliza las flechas, habran 4 enemigos por mundo y un boss, al vencer un boss aparecera un portal dependiendo del mundo que decidamos desbloquear, para interactuar con los bosses y los portales se debe pulsar 'f', los encuentros con los enemigos menores son aleatorios y ocurren mientras caminamos" ... Ya no escucho nada. Deberiamos anotar eso por si se nos olvida.'\\}
+	\hspace{-1cm}\textit{\textbf{Caballero:} 'Me perdi, como era que nos moviamos?'\\}
+	
+	Luego, los prenuevos podran moverse libremente en el mapa, los enemigos apareceran de manera aleatoria. Los retos de este mundo, junto a sus respuestas/codigos, son:
+	
+	\begin{itemize}
+		\item "(ID: froggit) Mostrar el hostname de la maquina sin leerlo de un archivo." \\ 
+			\$ hostname\\
+			\$ echo \$HOSTNAME\\ \\
+			Code: \textbf{IziPizi}
+			
+		\item "(ID: vegetoid) Regresarse al directorio al que estabas anteriormente sin indicar su PATH."\\
+			\$ cd -\\ \\
+			Code: \textbf{Excelent} \\ \\
+			Pista: "Usa un caracter especial."
+			
+		\item "(ID: whimsum) Sabemos que hay varios archivos que terminan con .log y estan a exactamente 2 directorios de profundidad en este mundo (ElYiano), encuentre dicho archivo."\\
+			\$ find . -mindepth 3 -maxdepth 3 -regex .*log\$ \\ \\
+			Code: \textbf{error404}
+			
+		\item "(ID: aaron) Ver cuanto pesan en total los directorios (no los archivos) del directorio $\sim$"\\
+			\$ ls -p $|$ grep / $|$ xargs du -sh \\ \\
+			Code: \textbf{compushow}
+			
+		\item "(ID: LG) Muestrame del archivo UNDINE la linea 90."\\
+			\$ cat UNDINE $|$ head -n 90 $|$ tail -n 1 \\ \\
+			Code: \textbf{Barinas}
+	\end{itemize}
+	
+\section{Elecci\'on}
+	Ya que el orden de los mundos es fijo, aqui colocaremos el dialogo entre la maga, el caballero y el falso EAS al ir descubriendo los mundos. Al entrar en un nuevo mundo, los prenuevos deberan darle un codigo (que les sera indicado) en el tty1 (donde esta el falso EAS) y asi desbloquearan dicho mundo en el tty2 (donde ello ejecutan comandos). Los dialogos son: 
+	
+	\begin{itemize}
+		\item \textit{\textbf{Maga:} 'La clarividencia esta haciendo efecto otra vez, presta atencion caballero, es importante. "El codigo $<$CODE$>$ les servira para desbloquear este mundo en la tty2, denles el codigo a EAS en la tty1 para activarla"'\\}
+		\textit{\textbf{Caballero:} 'No estabamos ya en la tty2?'\\}
+		
+		\item \textit{\textbf{Maga:} 'Viene un nuevo codigo, al menos aprendetelo para no equivocarnos al darselo a EAS.  "El codigo $<$CODE$>$ les servira para desbloquear este mundo en la tty2, denles el codigo a EAS en la tty1 para activarla"'\\}
+		\textit{\textbf{Caballero:} 'Perdon, no estaba prestando atencion, puedes repetirlo?'\\}
+		\textit{\textbf{Maga:} 'Ni se para que lo intento...'\\}
+		
+		\item \textit{\textbf{Maga:} '"El codigo $<$CODE$>$ les servira para desbloquear este mundo en la tty2, denles el codigo a EAS en la tty1 para activarla"'\\}
+		\textit{\textbf{Caballero:} 'Eso era tu clarividencia?'\\}
+		\textit{\textbf{Maga:} 'No webon, me provoco decirlo.'\\}
+		
+		\item \textit{\textbf{Maga:} '"El codigo $<$CODE$>$ les servira para desbloquear este mundo en la tty2, denles el codigo a EAS en la tty1 para activarla". Al parecer este es el ultimo mundo, no mas voces inesperadas en mi cabeza.'\\}
+		\textit{\textbf{Caballero:} 'Esta vez si me lo aprendi! El codigo es $<$CODE$>$
+'\\}
+		\textit{\textbf{Maga:} 'Felicidades...'\\}
+		
+	\end{itemize}
+\section{Magicant}
+	Al descubrir este mundo, EAS dira:
+	
+	\textit{'Excelente! Ya desbloquee el mundo 'Magicant'. Tengan mucho cuidado, los magos en ese lugar pueden llegar a ser muy poderosos, no se confien.'\\}	
+	
+	Los retos de este mundo, junto a sus respuestas/codigos, son:
+	
+	\begin{itemize}			
+		\item "(ID: madjick) Contar el numero de lineas en el archivo RIM que no aparecen en el archivo WORLD."\\
+			\$ diff RIM WORLD $|$ grep "$\wedge<$" $|$ wc -l \hspace{0.5cm}\# No consegui el pollito hacia arriba en LaTeX.\\ \\
+			Code: \textbf{flang}
+			
+		\item "(ID: parsnik) Contar el numero de archivos y directorios de DIR que comiencen en may\'usculas (no debe incluir los archivos de los subdirectorios ni los archivos ocultos)."\\
+			\$ ls -d [[:upper:]]* $|$ wc -l \\ \\
+			Code: \textbf{password} \\ \\
+			Pista: "En el man de grep hablan sobre las may\'usculas, mas no necesitan grep."
+			
+		\item "(ID: moldbygg) Mostrar el contenido de la linea de en medio del archivo FLOWY."\\
+			\$ head -n \$((\$(cat FLOWY $|$ wc -l)/2 + 1)) FLOWY $|$ tail -n 1 \\ \\
+			Code: \textbf{juancho.so}
+			
+		\item "(ID: shyren) Las lineas de TORIEL estan enumeradas desde 1, todas con un numero distinto, pero no estan ordenadas. Imprimir la linea con el numero 1, sustituyendo las "o" por "0"."\\
+			\$ sort TORIEL $|$ head -n 1 $|$ sed 's\textbackslash o\textbackslash 0\textbackslash g' \\ \\
+			Code: \textbf{naruto}
+			
+		\item "(ID: SV) Eliminar los archivos que terminen en algun numero entre 1 y 5 en los directorios que comiencen con borrar." \\ 
+			\$ rm borrar*/*[1-5] \\ \\
+			Code: \textbf{cossplay}
+	\end{itemize}
+	
+	
+\section{LaPuta}
+	Al descubrir este mundo, EAS dira:
+	
+	\textit{'Maravilloso! Estoy muy sorprendido. Ya esta disponible el mundo 'LaPuta'. Es uno de mis mundos favoritos, tristemente cayo en manos del maldito JO.'\\}	
+	
+	Los retos de este mundo, junto a sus respuestas/codigos, son:
+	
+	\begin{itemize}
+		\item "(ID: guard) Crear los dirs DIR1,DIR2,DIR3 con permiso 777 usando solo mkdir." \\ 
+			\$ mkdir --mode=777 DIR1 DIR2 DIR3 \\ \\
+			Code: \textbf{miraMaldito}
+			
+		\item "(ID: lesser) Mover todos los archivos a DIR que tengan 4 o 7 letras pero no sobreescribiendo los que ya existan en DIR."\\
+			\$ mv -n ???? ??????? DIR \\ \\
+			Code: \textbf{jefecito}
+			
+		\item "(ID: greater) Contar el numero de archivos, directorios y subdirectorios (ocultos y no ocultos) que tiene el directorio /home (no se preocupen por lost+found)."\\
+			\$ find . -mindepth 1 $|$ wc -l \\ \\
+			Code: \textbf{poMAC}
+			
+		\item "(ID: knight) Necesito poder acceder a /bin sin salir de este este directorio ni copiar los archivos de /bin."\\
+			\$ ln -s /bin bin \\ \\
+			Code: \textbf{EleFeEse}
+			
+		\item "(ID: JO) Copiar el contenido de la carpeta CUP y sus subdirectorios en HEAD sobre-escribiendo solo si el archivo a copiar es mas nuevo que el ya existente."\\
+			\$ cp -uR CUP HEAD \\ \\
+			Code: \textbf{mpdm}
+	\end{itemize}
+
+
+\section{Konohagakure}
+	Al descubrir este mundo, EAS dira:
+	
+	\textit{'Fantastico! La aldea 'Konohagakure' ya no se encuentra oculta para ustedes. Admito que cuando cree ese mundo acababa de ver cierto anime. Esten alertas, los monstruos ahi son implacables.'\\}	
+
+	Los retos de este mundo, junto a sus respuestas/codigos, son:
+	
+	\begin{itemize}
+		\item "(ID: dummy) Listar los archivos del mundo actual (Konohagakure) que contengan el nombre del usuario y que finalicen en .txt" \\ 
+			\$ ls $|$ grep \$(whoami).*\.txt\$ \\ \\
+			Code: \textbf{quantum}
+			
+		\item "(ID: loox) Verificar si te puedes conectar a 159.90.9.130, hacer que la verificacion de cada paquete no dure mas de 6 segundos y enviar solo 3 paquetes."\\
+			\$ ping -c 3 -w 6 159.90.9.130 \\ \\
+			Code: \textbf{memory}
+			
+		\item "(ID: gyftrot) Buscar en el directorio actual el archivo cuyo tamanyo en kilobytes es igual al numero de lineas que tiene el archivo FILE que se encuentra en alguno de los subdirectorios, luego verifiquen lo que contiene dicho archivo."\\
+			\$ cat \$(find . -size \$(wc -l \$(find . -name FILE) $|$ cut -d " " -f 1)k)\\ \\
+			Code: \textbf{elGIA}
+			
+		\item "(ID: memory) Hacer que todos los archivos del directorio DIR y sus subdirectorios tengan los mismos permisos que el archivo FILE."\\
+			\$ chmod --reference=FILE -R DIR \\ \\
+			Code: \textbf{DDoSattack}
+			
+		\item "(ID: AL) Mandar todos los archivos y subdirectorios (manteniendo su tiempo de modificacion y acceso) de MAC a la maquina con ip 159.90.9.130 usando el usuario prenuevos en su home."\\
+			\$ scp -p -r MAC prenuevos@159.90.9.130:~/ \\ \\
+			Code: \textbf{songs}
+	\end{itemize}
+	
+
+\section{NeoVice}
+	Al descubrir este mundo, EAS dira:
+	
+	\textit{'¡......M..u…...b….e..n… ya pued...o..c..municarme ...on..ustedes otr..a vez! ¡Han hecho un tr….b.jo formidable! Pero aún d..ben venir hasta acá, para sacarme d...la SIGST...GRIAL. Ya... no pod..re .. com..carme con ...des.¡Sólo un poc...más y tend..án su mer...cida recomp..nsa!'\\}	
+
+	Los retos de este mundo, junto a sus respuestas/codigos, son:
+	
+	\begin{itemize}
+		\item "(ID: EX) Matar el proceso que ejecuta yes." \\ 
+			\$ pkill yes \\ \\
+			Code: \textbf{kernelPanic}
+			
+		\item "(ID: mettaton) Matar todos los procesos 'xeyes'"\\
+			\$ ps -e $|$ grep 'xeyes' $|$ cut -d " " -f 2 $|$ xargs kill \\ \\
+			Code: \textbf{eterno}
+			
+		\item "(ID: gaster) Mostrar la siguiente informacion de las particiones cuyo FS sea ext4: filesystem, tipo, espacio asignado, espacio usado, espacio disponible, porcentaje usado y punto de montaje."\\
+			\$ df -hT $|$ grep ext4 \\ \\
+			Code: \textbf{fitnesss}
+			
+		\item "(ID: plane) Mostrar (solamente) el nombre del proceso que mas CPU consume."\\
+			\$ ps -eo "\%C \%c" $|$ sort -nr $|$ head -n 1 $|$ cut -d " " -f 3\\ \\
+			Code: \textbf{KaiseR}
+			
+		\item "(ID: JK) Entrar al directorio BOSS y borrar todos los archivos del directorio actual sin usar wildcards (./*, *, etc)"\\
+			\$ ls $|$ xargs rm -rf \\ \\
+			Code: \textbf{Bash}
+	\end{itemize}
+	
+
+\section{Kernel}
+	Al llegar al kernel, encontrarse con el Space Invader y no con EAS, ocurrira el siguiente dialogo:\\
+	
+	\textit{\textbf{Caballero:} 'Que esta pasando? Aqui no deberia estar EAS?'\\}
+	\textit{\textbf{Maga:} 'Yo tampoco entiendo, a menos qu- espera! Segun mi clarividencia, deberiamos ir a ver a la tty1 y ejecutar "F-EAS" para despertar a EAS.'\\}
+	\textit{\textbf{Caballero:} 'Entendido, vamos lo mas rapido posible.'\\}
+	
+	\textbf{(tty1)} Al colocar el codigo "F-EAS" en la tty1, ocurrira:\\
+	
+	\textit{\textbf{Space Invader:} 'Gracias, héroes del Digimundo, por liberarme. Debo admitir que me sorprende su determinación. Estoy tan sorprendido que hasta tengo ganas de bailar. BAILAR SOBRE SUS TUMBAS.'\\}
+	
+	\textit{'Por la barba de Stallman, ya ese fichero me estaba volviendo chiflado. Siento que tenía una eternidad atrapado ahí dentro. Aunque, todo este tiempo me sirvió para reflexionar sobre muchas cosas. Por ejemplo, que el Xiaomi tiene la mejor relación calidad-precio del mercado. Pero bueno…'\\}
+	
+	\textit{'Cierto, siguen ahí. Sí, los engañé. Que [advertencia de grosería] tontos son. Habían muchos indicadores que predecían que EAS no era quien decía ser. Comenzando con que el juego es un rpg basado en Undertale.. Permítanme presentarme de nuevo: Yo soy el Space Invaders. El invasor del espacio.'\\}
+	
+	\textit{'No hay mucho que decir sobre mi, no es que haya hecho muchas cosas en mi vida a parte de invadir planetas y luchar contra navecitas espaciales que disparan rayos láser. Les contaré la verdad, para no matarlos conociendo la historia chucuta: Inicié la gran invasión del espacio exterior con mis amigos porque estábamos aburridos. Un hombre, que se hacía llamar EAS, junto a los primeros MACkenzies lograron vencer a mi ejército y como no pudieron conmigo, no tuvieron opción más que encerrarme.'\\}
+	
+	\textit{'Mi figura se convirtió en su símbolo. Un constante recordatorio de su victoria y una burla a mis compatriotas caídos. Mi ira era cada vez mayor. Esperé pacientemente a que llegara la generación de MACkenzies más débil para poner mi plan en acción. Hasta que por fín llegó. Fue entonces cuando me puse en contacto con ustedes. Lo aposté todo y gané. El hecho que obedecieran todas mis órdenes pensando que luchaban por una buena causa hasta me produce náuseas. La mejor parte es que me aligeraron bastante el trabajo matando a todo lo que se topaba con ustedes.'\\}
+	
+	\textit{'Pero bueno, basta de tanta cháchara. Ahora los mataré para apoderarme por completo de este insignificante mundo. Son capaces de ir y enfrentarme?'\\}
+	
+	\textbf{(Unity)} Al enfrentar al Space Invader, los prenuevos recibiran un instakill que los regresara a ElYiano.
+	
+	
+\section{Nuevo Comienzo}
+	Al aparecer en ElYiano, a los prenuevos les hablara el verdadero EAS y les dira:
+	
+	\textit{'Finalmente. La hora ha llegado. EAS, así es como me conocen. Me disculpo por hacerlos pasar por tantos disgustos. Era la única forma de acceder al kernel. La única forma de saldar mis cuentas pendientes. Ahora les confiero mi poder. El poder que estuve guardando por generaciones para este momento. Pero para vencer al Space Invader, deberan vencer al resto de los monstruos. LOS MACKENZIES CONFIAMOS EN USTEDES. PARA CREAR, PRIMERO HAY QUE DESTRUIR.'\\}
+	
+	Por lo tanto, deberan vencer a todos los monstruos para regresar al kernel.
+	
+\section{Final}
+	Al vencer a todos los monstruos, regresar al Kernel e interactuar con el Space Invader, este les dira:
+	
+	\textit{'Cáspita. Volvieron. Y con calzones nuevos. Pero bueno, si tengo que matarlos un billón de veces, lo haré. Aunque, primero me gustaría divertirme un poco destruyéndolos lentamente. No saben el placer que me produce la agonía ajena. Si son tan valientes para enfrentarse a mi, ejecuten "END" en la tty1.'\\}
+	
+	Luego de esto, los prenuevos no podran moverse en Unity. \textbf{(tty1)} Al escribir END en la tty1, aparecera:\\
+	
+	\textit{'3N53R10 P13N54N QU3 9U3D3N C0NTR4 M1?! L0 PAG4R4N CAR0. YO 4H0R4 T3NG0 3L CONTR0L DEL D1G1T4L W0RLD. N0 P0DR4N H4C3R N4D4! J4J4J4J4J4J4"'\\}
+	
+	Y empezara el combate contra el Space Invader, el cual deberan matar desde otra tty. Si lo logran, aparecera el ultimo monologo del Space Invader:\\
+	
+	\textit{'Y la raza más débil vuelve a ganar. Que patética historia. Al menos logré comer cachapas con chicharrón antes de morir. Nos vemos en el /dev/null, héroes.'\\}
+	
+
+\section{Epilogo}
+	\textit{'El SPACE INVADERS fue finalmente eliminado. Pero hubieron bajas: los MACkenzies perecieron. Ahora, sin la tutela de EAS, todo parece estar perdido. Aguantame las carnes. Comienzas a recordar algo. Las palabras que pronunció EAS antes de desaparecer. “Para crear, primero hay que destruir”. FIN'}
+
+	
+	
+
+	
+	
+	
+\end{document}
+	
+

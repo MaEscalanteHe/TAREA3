@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Longitud maxima del texto a la derecha.
+l=80	# MODIFICAR SI SE CAMBIA LA IMAGEN.
+
+color=$1
+sprite=$2
+text=$3
+wait=$4
+
+# Longitud del texto.
+length=${#text}
+# Numero de linea que ocupa el texto a la derecha.
+nLines=$((${length}/${l} + 1))
+
+# Obtenemos la n-esima linea.
+function obtainLine()
+{
+	line=$(echo -e "\033[1;${color}m$(cat "$sprite" | head -n $N | tail -n 1)\033[0;0m")
+}
+
+# Obtenemos el texto correspondiente a la n-esima linea.
+function obtainText()
+{
+	subText=${text:$pos:$l}
+}
+
+# Limpiamos la pantalla y ejecutamos un salto de linea para cuadrar la imagen.
+clear
+echo " "
+
+if [ -z "$wait" ]; then
+	# Imprimimos la imagen.
+	echo -e "\033[1;${color}m$(cat $sprite)\033[0;0m" | pv -qL2222
+else
+	# Imprimimos la imagen.
+	echo -e "\033[1;${color}m$(cat $sprite)\033[0;0m"
+fi
+
+echo -e "\033[H"
+
+# MODIFICAR EL LIMITE SUPERIOR DEL CONJUNTO {0..N} SI SE CAMBIA LA IMAGEN.
+for i in {0..31}; do
+
+	# n-esima linea.
+	N=$(( $i+1 ))
+	# Posicion del texto respecto a la n-esima linea.
+	pos=$(( $i*$l ))
+
+	obtainLine
+	obtainText
+
+	# Si todavia no se han impreso todas las lineas del texto:
+	if [[ "$(($N-1))" -lt "$nLines" ]]; then
+
+		# Imprimimos la linea correspondiente a la imagen sin salto de linea al final.
+		echo -n "$line"
+		# MODIFICAR EL LIMITE SUPERIOR DE {0..N} SI SE CAMBIA LA IMAGEN
+		for t in {0..80}; do echo -n "${subText:$t:1}"; sleep 0.06; done
+		echo ""
+
+	# Si no, solo se imprime la imagen
+	else
+		echo "$line"
+	fi
+done

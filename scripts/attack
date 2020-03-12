@@ -1,0 +1,743 @@
+#!/bin/bash
+
+# Funcion para generar codigos aleatorios.
+function newFalseCode
+{
+  falseCode=""
+  # Generamos 8 caracteres aleatorios.
+  for i in {0..6}; do
+    falseCode+=${chars[$( echo $(($RANDOM%62)) )]}
+  done
+}
+
+# Informacion de los retos.
+INFO_MONSTERS="
+    \033[0;1m (FACIL)\033[0;0m \t1.- Mostrar el hostname de la maquina sin leerlo de un archivo\n
+    \033[0;1m(FACIL)\033[0;0m \t2.- Regresarse al directorio anterior sin indicar su path.\n
+    \033[0;1m(FACIL)\033[0;0m \t3.- Sabemos que hay varios archivos que terminan con .log y estan a exactamente 2 directorios de profundidad en /var, encuentre dicho archivo\n
+    \033[0;1m(FACIL)\033[0;0m \t4.- Matar el proceso que ejecuta yes\n
+    \033[0;1m(FACIL)\033[0;0m \t5.- Eliminar los archivos que terminen en algun numero entre 1 y 5 en los directorios que comiencen con borrar.\n
+    \033[0;1m(FACIL)\033[0;0m \t6.- Crear los dirs DIR1,DIR2,DIR3 con permiso 777 usando solo mkdir.\n
+    \033[0;1m(FACIL)\033[0;0m \t7.- Mover todos los archivos a DIR que tengan 4 o 7 letras pero no sobreescribiendo los que ya existan en DIR.\n
+    \033[0;1m(FACIL)\033[0;0m \t8.- Muestrame del archivo FILE la linea 90.\n
+    \033[0;1m(FACIL)\033[0;0m \t9.- Contar el numero de lineas en el archivo FILE1 que no aparecen en el archivo RIM.\n
+    \033[0;1m(FACIL)\033[0;0m \t10.- Contar el numero de archivos y directoiros de DIR que comiencen en mayusculas (no debe incluir los archivos de los subdirectorios ni los archivos ocultos).\n
+    \033[0;1m(FACIL)\033[0;0m \t11.- Listar los archivos en /home que contengan el nombre del usuario y que finalicen en .txt\n
+    \033[0;1m(FACIL)\033[0;0m \t12.- Ver cuanto pesan en total los directorios (no los archivos) del directorio ~.\n
+    \033[0;1m(FACIL)\033[0;0m \t13.- Verificar si te puedes conectar a 159.90.9.130, hacer que la verificacion no dure mas de 6 segundos y enviar a lo sumo 3 paquetes.\n
+    \n\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t14.- Contar el numero de archivos, directorios y subdirectorios (ocultos y no ocultos) que tiene el directorio /home (no se preocupen por lost+found).\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t15.- Mostrar el contenido de la linea de en medio del archivo FILE.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t16.- Las lineas de FILE estan enumeradas desde 1, todas con un numero distinto, pero no estan ordenadas. Imprimir la linea con el numero 1, sustituyendo las 'o' por '0'.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t17.- Mandar todos los archivos y subdirectorios (manteniendo su tiempo de modificacion y acceso) de DIR a la maquina con ip 159.90.9.130 usando el usuario prenuevos en su home.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t18.- Copiar el contenido de la carpeta DIR1 y sus subdirectorios en DIR2 sobre-escribiendo solo si el archivo a copiar es mas nuevo que el ya existente.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t19.- Buscar en el directorio actual el archivo cuyo tamanyo en kilobytes es igual al numero de lineas que tiene el archivo FILE que se encuentra en alguno de los subdirectorios, luego verifiquen lo que contiene dicho archivo. \n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t20.- Matar todos los procesos 'xeyes'.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t21.- Necesito poder acceder a /bin sin salir de este este directorio ni copiar los archivos de /bin.\n
+    \033[0;1m(INTERMEDIO)\033[0;0m \t22.- Mostrar la siguiente informacion de las particiones cuyo FS sea ext4: filesystem, tipo, espacio asignado, espacio usado, espacio disponible, porcentaje de espacio usado y punto de montaje.\n
+    \n\n
+    \033[0;1m(DIFICIL)\033[0;0m \t23.- Mostrar todos los archivos en /bin que comienzan con "x" y un caracter entre m y z; y son enlaces simbolicos, y leerlos en orden alfabetico.\n
+    \033[0;1m(DIFICIL)\033[0;0m \t24.- Mostrar (solamente) el nombre del proceso que mas CPU consume.\n
+    \033[0;1m(DIFICIL)\033[0;0m \t25.- Borrar todos los archivos del directorio actual sin usar wildcards (./*, *, etc).\n
+    "
+# Guardamos en chars el abecedario (mayusculas y minusculas) y los numeros.
+chars=($(echo {a..z} {A..Z} {0..9}))
+# Codigo falso.
+falseCode=""
+# Codigo veradero.
+code=""
+
+
+# Obtenemos el comando indicado.
+if [ "$1" != "help" ] && [ "$1" != "monsters" ] && [ "$1" != "all-monsters" ]; then
+  read -p "command> " COMMAND
+elif [ "$1" = "monsters" ]; then
+  read -p "monster> " COMMAND
+elif [ "$1" = "all-monsters" ]; then
+  echo "1" > chance
+fi
+
+# Chance
+chance=`cat chance`
+
+#exec 2> /dev/null	# Ignorar todos los errores
+
+# Verificamos que el mounstruo y el mundo actual coincidan.
+enemy=`echo $1 | grep "froggit\|vegetoid\|whimsum\|aaron\|LG"`
+pwd=`echo $PWD | grep ElYiano`
+if [ -n "$enemy" ] && [ -n "$pwd" ]; then
+  world="correct"
+fi
+enemy=`echo $1 | grep "madjick\|parsnik\|moldbygg\|shyren\|SV"`
+pwd=`echo $PWD | grep Magicant`
+if [ -n "$enemy" ] && [ -n "$pwd" ]; then
+  world="correct"
+fi
+enemy=`echo $1 | grep "guard\|lesser\|greater\|knight\|JO"`
+pwd=`echo $PWD | grep LaPuta`
+if [ -n "$enemy" ] && [ -n "$pwd" ]; then
+  world="correct"
+fi
+enemy=`echo $1 | grep "dummy\|loox\|gyftrot\|memory\|AL"`
+pwd=`echo $PWD | grep Konohagakure`
+if [ -n "$enemy" ] && [ -n "$pwd" ]; then
+  world="correct"
+fi
+enemy=`echo $1 | grep "EX\|mettaton\|gaster\|plane\|JK"`
+pwd=`echo $PWD | grep NeoVice`
+if [ -n "$enemy" ] && [ -n "$pwd" ]; then
+  world="correct"
+fi
+
+
+# Verificamos que el numero de argumentos sea 1.
+if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
+
+  MONSTER=$1  # Monstruo al que esta atacando
+
+  # Cada monstruo tiene su propia verificacion
+  case $MONSTER in
+    
+    # C -> Carlos
+    # S -> Sandra
+    # J -> Juan
+    # A -> Amin
+    # K -> Kauze
+    ########################## FACILES ##########################
+    froggit)  # C-RETO: Mostrar el hostname de la maquina sin leerlo de un archivo.
+        #       $ hostname
+      
+        ANSWER=`hostname`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+
+        code="izipizi";;
+
+
+    vegetoid)  # C-RETO: Regresarse al directorio anterior sin indicar su path.
+        #       $ cd -
+
+        RESULT=`echo ${COMMAND} | grep "^cd[[:space:]]*\-$"`
+
+        if [ -n "$RESULT" ]; then
+          ANSWER=$RESULT
+        else
+          ANSWER="Incorrecto"
+        fi
+        
+        code="Excelent";;
+
+
+    whimsum)  # C-RETO: Sabemos que hay varios archivos que terminan con .log y estan 
+        # a exactamente 2 directorios de profundidad en este mundo (ElYiano), 
+        # encuentre dicho archivo.
+        #       $ find . -mindepth 3 -maxdepth 3 -regex .*log$
+
+        ANSWER=`find . -mindepth 3 -maxdepth 3 -regex .*log$`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        
+        code="error404";;
+
+
+    EX)  # K-RETO: Matar el proceso que ejecuta yes.
+        #       $ pkill yes
+
+        # Creamos un proceso yes sin stdout
+        yes "INCORRECTO" > /dev/null &
+        # Evaluamos el comando dado
+        eval \`${COMMAND}\`    
+        # Vemos si aun hay procesos con yes que no sean el mismo grep ni el pkill
+        RESULT=`ps aux | grep yes | grep -v grep | grep -v pkill`
+        # El resultado deberia ser vacio
+        ANSWER=""
+        
+        code="kernelPanic";;
+
+
+    SV)  # S-RETO: Eliminar los archivos que terminen en algun numero entre 1 y 5 en los 
+        # directorios que comiencen con borrar.
+        #       $ rm borrar*/*[1-5]
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos directorios y archivos para probar
+        mkdir borrar{A,B,C,D,E}
+        touch borrar{A,B,C,D,E}/{A,B,C,D}{1,2,3,4,5}
+        # Evaluamos el comando dado
+        eval \`${COMMAND}\`
+        # Verificamos si se borraron realmente los archivos 
+        RESULT=`ls | grep "borrar*" | xargs ls | grep ".*[1-5]"`
+        # El resultado deberia ser vacio
+        ANSWER=""
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="cossplay";;
+
+
+    guard)  # J-RETO: Crear los dirs DIR1,DIR2,DIR3 con permiso 777 usando solo mkdir.
+        #         $ mkdir --mode=777 DIR1 DIR2 DIR3
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Evaluamos el comando dado
+        eval \`${COMMAND}\`
+        # Verificamos si se crearon correctamente los directorios
+        RESULT=`ls -l | grep -v "rwxrwxrwx.*DIR[1-3]" | grep -v total`
+        if [ -z "$RESULT" ]; then
+          RESULT=`ls -l | grep "rwxrwxrwx.*DIR[1-3]" | grep -v total`
+
+          if [ -n "$RESULT" ]; then
+            RESULT=`echo $COMMAND | grep chmod`
+
+            if [ -z "$RESULT" ]; then
+              RESULT="Correcto"
+              ANSWER=$RESULT
+            fi
+
+          else
+            ANSWER="Incorrecto"
+          fi
+
+        else
+          ANSWER="Incorrecto"
+        fi
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="miraMaldito";;
+
+
+    lesser)  # J-RETO: Mover todos los archivos a DIR que tengan 4 o 7 letras pero no sobreescribiendo 
+        # los que ya existan en DIR.
+        #       $ mv -n ???? ??????? DIR
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos los directorios y archivos necesarios para la evaluacion
+        mkdir DIR
+        echo "No borrar!" > DIR/txtA
+        touch txt{A,B,C,D,E1,E2,E3,E01,E02,E03,A11a,B11b,C11c}
+        # Evaluamos el comando dado
+        eval \`${COMMAND}\`
+        # Verificamos si se movieron correctamente los archivos
+        RESULT=`ls -R`
+
+        # El resultado deberia ser ($ mv -n ???? ??????? DIR), al aplicar ls -R deberiamos 
+        # obtener
+        cd ..
+        rm -rf PRueBA
+        mkdir PRueBA 
+        cd PRueBA
+        mkdir DIR
+        echo "No borrar!" > DIR/txtA
+        touch txt{A,B,C,D,E1,E2,E3,E01,E02,E03,A11a,B11b,C11c}
+        mv -n ???? ??????? DIR
+        ANSWER=`ls -R`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="jefecito";;
+
+
+    LG)  # C-RETO: Muestrame del archivo UNDINE la linea 90.
+        #       $ cat UNDINE | head -n 90 | tail -n 1
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos el archivo para la evaluacion
+        touch UNDINE
+        for i in {1..100}; do 
+          echo "Linea No. $i" >> UNDINE
+        done
+
+        ANSWER=`cat UNDINE | head -n 90 | tail -n 1`
+        eval RESULT=\`${COMMAND}\`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="Barinas";;   
+
+
+    madjick)  # S-RETO: Contar el numero de lineas en el archivo RIM que no aparecen en el archivo WORLD. 
+        #       $ diff RIM WORLD| grep "^<" | wc -l
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA 
+
+        # Creamos los archivos para la evaluacion
+        touch RIM WORLD
+
+        for i in {1..100}; do 
+          echo "Linea No. $i" >> FILE
+        done
+
+        for i in {63..100}; do 
+          echo "Linea No. $i" >> FILE
+        done
+
+        ANSWER=`diff RIM WORLD| grep "^<" | wc -l`
+        eval RESULT=\`${COMMAND}\`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="flang";; 
+
+
+    parsnik) # S-RETO: Contar el numero de archivos y directorios de DIR que comiencen en mayusculas (no debe incluir los archivos de los subdirectorios ni los archivos ocultos).
+        #       $ ls -d [[:upper:]]* | wc -l
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA 
+
+        touch {A,B,C,D,a,b,c,d}{1,2,3,4}{MAC,GIA}
+        mkdir -p {DIR,dir}/{A,B,C,D}/{mac,gia,MACGIA}
+
+        ANSWER=`ls -d [[:upper:]]* | wc -l`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="password";;
+
+        
+
+
+    dummy) # A-RETO: Listar los archivos en el mundo actual (Konohagakure) que contengan el nombre del usuario y que 
+        # finalicen en .txt 
+        #        $ ls | grep $(whoami).*\.txt$
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+
+        # Creamos los archivos para la evaluacion
+        touch file{$(whoami),A,B,C}{1,2,3,4}{.txt,.al,.jk,.jo}{.txt,.A,.B,.C}
+
+        ANSWER=`ls | grep $(whoami).*\.txt$`
+        eval RESULT=\`${COMMAND}\`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="quantum";;
+
+
+    aaron) # C-RETO: Ver cuanto pesan en total los directorios (no los archivos) del directorio ~
+        #       $ ls -p | grep / | xargs du -sh
+        
+        cd ~
+
+        ANSWER=`ls -p | grep / | xargs du -sh`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+
+        cd - > /dev/null
+        
+        code="compushow";;
+
+
+    loox) # A-RETO: Verificar si te puedes conectar a 159.90.9.130, hacer que la verificacion 
+        # no dure mas de 6 segundos y enviar a lo sumo 3 paquetes.
+        #       $ ping -c 3 -w 6 159.90.9.130
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+
+        # Verificamos que se enviaron 3 paquetes.
+        RESULT=`echo $RESULT | grep -o "3 packets transmitted"` 
+        # Verificamos que se uso el flag -w 6 y que la ip sea correcta
+        EVAL=`echo $COMMAND | grep "\-w 6.*159.90.9.130"`
+        if [ -n "$EVAL" ]; then 
+          ANSWER=`ping -c 3 -w 6 159.90.9.130 | grep -o "3 packets transmitted"`
+        else
+          ANSWER="Incorrecto"
+        fi
+        
+        code="memory";;
+
+
+    
+    ########################## INTERMEDIOS ##########################
+    greater) # J-RETO: Contar el numero de archivos, directorios y subdirectorios 
+        # (ocultos y no ocultos) que tiene el directorio /home (no se
+        # preocupen por lost+found).
+        #       $ find . -mindepth 1 | wc -l
+        TIP="Tengan cuidado con ls, posiblemente cuente directorios de mas."
+
+        ANSWER=`find /home -mindepth 1 | wc -l`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        
+        code="poMAC";;
+
+    
+    moldbygg) # S-RETO: Mostrar el contenido de la linea de en medio del archivo FLOWY.
+        #       $ head -n $(($(wc -l FLOWY| grep -o [0-9]*)/2 + 1)) FLOWY | tail -n 1
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos el archivo para la evaluacion
+        touch FLOWY
+        for i in {1..368}; do 
+          echo "Linea No. $i" >> FLOWY
+        done
+
+        ANSWER=`head -n $(($(wc -l FLOWY | cut -d " " -f 1)/2 + 1)) FLOWY | tail -n 1`
+        eval RESULT=\`${COMMAND}\`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="juancho.so";; 
+
+
+    shyren) # S-RETO: Las lineas de TORIEL estan enumeradas desde 1, todas con un numero distinto, pero no estan ordenadas. Imprimir la linea con el numero 1, sustituyendo las "o" por "0".
+        #       $ sort TORIEL | head -n 1 | sed 's\o\0\g'
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos el archivo para la evaluacion
+        touch TORIEL
+        for i in {1..368}; do 
+          echo "Linoo No. o$(( ($i+100)%368 ))" >> TORIEL
+        done
+
+        ANSWER=`sort TORIEL | head -n 1 | sed 's\o\0\g'`
+
+        eval RESULT=\`${COMMAND}\`
+        
+        code="naruto";;
+
+
+    AL) # A-RETO: Mandar todos los archivos y subdirectorios (manteniendo su tiempo de modificacion 
+        # y acceso) de MAC a la maquina con ip 159.90.9.130 usando el usuario prenuevos en su home.
+        #       $ scp -p -r MAC prenuevos@159.90.9.130:~/
+
+        # Eliminamos el directorio MAC para evitar interferencias con la prueba
+        ssh -q prenuevos@159.90.9.130 rm -rf MAC
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+        # Creamos los archivos y subdirectorios necesarios para la evaluacion
+        mkdir -p MAC/borrar{A,B,C,D,E}/{A,B,C,D}{1,2,3,4,5}/
+        touch MAC/borrar{A,B,C,D,E}/{A,B,C,D}{1,2,3,4,5}/{A,B,C,D}{.txt,.md,.mac}
+
+        echo "Esto tardara un poquito... No te desesperes :3"
+
+        # Evaluamos el comando
+        eval \`${COMMAND}\`
+
+        # Verificamos los archivos de MAC en la maquina remota
+        RESULT=`ssh -q prenuevos@159.90.9.130 ls -R MAC`
+        # Eliminamos los archivos creados
+        ssh -q prenuevos@159.90.9.130 rm -rf MAC
+
+        # Repitimos los mismos pasos con el comando correcto
+        scp -q -p -r MAC prenuevos@159.90.9.130:~/
+
+        ANSWER=`ssh -q prenuevos@159.90.9.130 ls -R MAC`
+        ssh -q prenuevos@159.90.9.130 rm -rf MAC
+        
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="songs";; 
+
+
+    JO) # J-RETO: Copiar el contenido de la carpeta CUP y sus subdirectorios en HEAD sobre-escribiendo 
+        # solo si el archivo a copiar es mas nuevo que el ya existente 
+        #       $ cp -uR CUP HEAD
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+
+        mkdir -p CUP/{A,B,C,D,E}/{1,2,3,4,5,6}
+        touch CUP/{A,B,C,D,E}/{1,2,3,4,5,6}{.txt,.md,.aux,.mac}
+        mkdir -p HEAD/CUP/{A,B}
+        touch HEAD/CUP/{A,B}/{4,5}{.txt,.mac}
+        echo "Esto se debe borrar" > HEAD/CUP/A/5.mac
+        touch --date="Sun, 20 Feb 2004 16:21:42 -0800" HEAD/CUP/A/5.mac
+        echo "Esto no se deberia borrar" > HEAD/CUP/B/4.txt
+        touch --date="Sun, 20 Feb 2024 16:21:42 -0800" HEAD/CUP/B/4.txt
+
+        # Evaluamos el comando
+        eval \`${COMMAND}\`
+
+        # Verificamos los archivos de HEAD
+        RESULT=`ls -lR HEAD`
+        RESULT=$RESULT`find HEAD | xargs cat `
+
+        rm -rf HEAD
+        mkdir -p HEAD/CUP/{A,B}
+        touch HEAD/CUP/{A,B}/{4,5}{.txt,.mac}
+        echo "Esto se debe borrar" > HEAD/CUP/A/5.mac
+        touch --date="Sun, 20 Feb 2004 16:21:42 -0800" HEAD/CUP/A/5.mac
+        echo "Esto no se deberia borrar" > HEAD/CUP/B/4.txt
+        touch --date="Sun, 20 Feb 2024 16:21:42 -0800" HEAD/CUP/B/4.txt
+
+        cp -uR CUP HEAD
+        ANSWER=`ls -lR HEAD`
+        ANSWER=$ANSWER`find HEAD | xargs cat`
+        
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="mpdm";;
+
+
+    gyftrot) # A-RETO: Buscar en el directorio actual el archivo cuyo tamanyo en kilobytes es igual 
+        # al numero de lineas que tiene el archivo FILE que se encuentra en alguno de los 
+        # subdirectorios, luego verifiquen lo que contiene dicho  archivo
+        #       $ cat $(find . -size $(wc -l $(find . -name FILE) | cut -d " " -f 1)k)
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+
+        mkdir -p {A,B,C,D,E}/{1,2,3,4,5,6}/{MAC,GIA,DELU}
+        touch {A,B,C,D,E}/{1,2,3,4,5,6}/{MAC,GIA,DELU}/{K,L,M,N}.txt
+        touch D/2/GIA/FILE
+        for i in {1..7801}; do echo $i >> A/1/MAC/L.txt; done
+        for i in {1..38}; do echo $i >> D/2/GIA/FILE; done
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        ANSWER=`cat $(find . -size $(wc -l $(find . -name FILE) | cut -d " " -f 1)k)`
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="elGIA";;
+
+
+    mettaton) # K-RETO: Matar todos los procesos 'xeyes'
+        #       $ ps -e | grep 'xeyes' | cut -d " " -f 2 | xargs kill
+
+        # Creamos algunos procesos 'xeyes'
+        for i in {1..24}; do 
+          xeyes &
+        done
+
+        # Evaluamos el resultado del comando dado
+        eval \`${COMMAND}\`
+
+        RESULT=`ps -e | grep 'xeyes'`
+
+        if [ -z "$RESULT" ]; then  
+          ANSWER=$RESULT
+        else
+          ANSWER="Incorrecto"
+        fi
+
+        # Matamos todos los procesos
+        ps -e | grep 'xeyes' | cut -d " " -f 2 | xargs kill
+        
+        code="eterno";;
+
+    
+    knight) # J-RETO: Necesito poder acceder a /bin sin salir de este este directorio ni copiar los 
+        # archivos de /bin.
+        #       $ ln -s /bin bin
+
+        # Evaluamos el comando dado
+        RESULT=`echo $COMMAND | grep "^ln" | grep "\-s.*/bin"`
+
+        if [ -n "$RESULT" ]; then
+          ANSWER=$RESULT
+        else
+          ANSWER="Incorrecto"
+        fi
+        
+        code="EleFeEse";;
+
+
+    gaster) # K-RETO: Mostrar la siguiente informacion de las particiones cuyo FS sea ext4:
+        #       filesystem, tipo, espacio asignado, espacio usado, espacio disponible, porcentaje
+        #       usado y punto de montaje.
+        #       $ df -hT | grep ext4
+
+        ANSWER=`df -hT | grep ext4`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        
+        code="fitnesss";;
+    
+
+    
+    ########################## DIFICILES ##########################
+    memory) # A-Hacer que todos los archivos del directorio DIR y sus subdirectorios 
+        # tenga los mismos permisos que el archivo FILE.
+
+        #       $ chmod --reference=FILE -R DIR
+
+        # Creamos un directorio de prueba
+        mkdir PRueBA 
+        cd PRueBA
+
+        mkdir -p DIR/{1,2,3,4,5}/{MAC,GIA,DELU}
+        touch DIR/{1,2,3,4,5}/{MAC,GIA,DELU}/{K,L,M,N}.txt
+        touch FILE
+        chmod 777 FILE
+
+        # Evaluamos el resultado del comando dado
+        eval \`${COMMAND}\`
+
+        RESULT=`ls -Rl DIR | grep -- "rwxrwxrwx" | wc -l`
+
+        if [ "$RESULT" -eq 80 ]; then
+          ANSWER="Correcto"
+          RESULT=$ANSWER
+        else
+          ANSWER="Incorrecto"
+        fi
+
+        # Eliminamos todo el directorio de prueba
+        cd ..
+        rm -rf PRueBA
+        
+        code="DDoSattack";;        
+
+
+    plane) # K-Mostrar (solamente) el nombre del proceso que mas CPU consume.
+        #       $ ps -eo "%C %c" | sort -nr | head -n 1 | cut -d " " -f 3
+
+        ANSWER=`ps -eo "%C %c" | sort -nr | head -n 1 | cut -d " " -f 3`
+
+        # Evaluamos el resultado del comando dado
+        eval RESULT=\`${COMMAND}\`
+        
+        code="KaiseR";;
+
+
+    JK) # K-Entrar al directorio BOSS y borrar todos los archivos del directorio actual sin usar wildcards (./*, *, etc)
+        #       $ cd BOSS; ls | xargs rm -rf
+
+        RESULT=`echo "${COMMAND}" | grep "*"`
+        
+        if [ -z "$RESULT" ]; then
+
+          # Creamos un directorio de prueba
+          mkdir PRueBA 
+          cd PRueBA
+
+          mkdir -p BOSS/{A,B,C,D}/{M,P,D,M}
+          touch BOSS/{A,B,C,D}/{M,P,D}/{1,2,3,4}
+
+          mkdir -p {A,B,C,D,E}/{1,2,3,4,5,6}/{MAC,GIA,DELU}
+          touch {A,B,C,D,E}/{1,2,3,4,5,6}/{MAC,GIA,DELU}/{K,L,M,N}.txt
+
+          # Evaluamos el resultado del comando dado
+          eval \`${COMMAND}\`
+
+          RESULT=`ls`
+
+          if [ -z "$RESULT" ]; then
+            ANSWER="Correcto"
+            RESULT=$ANSWER
+          else
+            ANSWER="Incorrecto"
+          fi   
+
+          # Eliminamos todo el directorio de prueba
+          cd ..
+          rm -rf PRueBA    
+
+        else
+          ANSWER="Incorrecto"
+        fi
+        
+        code="Bash";;
+
+
+
+    help)  echo -e "Sintaxis: 
+      \033[0;1mattack\033[0;0m <MONSTER|\033[0;1mmonsters\033[0;0m|\033[0;1mall-monsters\033[0;0m|\033[0;1mhelp\033[0;0m>
+        
+        \033[0;1mMONSTER\033[0;0m   es un numero que indica a que monstruo (reto) vas a atacar.
+        \033[0;1mmonster\033[0;0m   te permite revisar un monstruo (reto) en especifico.
+        \033[0;1mall-monsters\033[0;0m    te muestra todos los monstruos (retos).
+        \033[0;1mhelp\033[0;0m    bueno... help."
+        RESULT="-1"
+        NO_MONSTER="-1"
+        HELP="1";;
+
+    monsters) echo -e $INFO_MONSTERS | grep "[[:space:]]$COMMAND\.-"
+        NO_MONSTER="1"
+        RESULT="-1"
+        HELP="1";;
+
+    "all-monsters") echo -e $INFO_MONSTERS
+        NO_MONSTER="1"
+        RESULT="-1"
+        HELP="1";;
+
+    *)  echo "No-Monster"
+        NO_MONSTER="1"
+        RESULT="-1";;
+  esac
+
+  # Mostramos los resultados
+  if [ "$RESULT" = "$ANSWER" ]; then
+    echo $code
+    echo "0" > chance
+  elif [ -z "$NO_MONSTER" ]; then
+    newFalseCode
+    # Nos aseguramos que el codigo falso no sea igual al verdadero.
+    # (aunque la probabilidad de eso es casi 0).
+    while [ "$falseCode" == "$code" ]; do
+      newFalseCode
+
+    done
+    
+    echo $falseCode
+    echo "0" > chance
+  elif [ -z "$HELP" ]; then
+    echo "El monstruo indicado no existe."
+  fi
+
+
+# Si el numero de argumentos no es 1, error.
+elif [ $# != 1 ]; then
+  echo "Numero de argumentos invalidos.
+  Sintaxis:  attack <MONSTER|monsters|all-monsters|help>"
+elif [ -z "$world" ]; then
+  echo "El mundo actual no coincide con el enemigo. Asegurate de estar en el directorio correcto."
+else 
+  echo "No tienes a nadie a quien atacar."
+  echo $world
+fi
