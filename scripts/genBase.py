@@ -70,7 +70,7 @@ os.system("echo \"alias ls='ls --color'\" >> /home/Uc207Pr4f57t9/.bashrc")
 # os.system('mkdir /home/preparador/admision/ && cp ../credits/credits.py /home/preparador/admision/')
 os.system("echo \"alias instakilleas='python3 /home/preparador/admision/credits.py'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system('echo "alias kill=\'sudo kill\'\" >> /home/Uc207Pr4f57t9/.bashrc')
-os.system('echo \'export PATH=$PATH:/tmp/attack\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
+os.system('echo \'export PATH=$PATH:/tmp/script/\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
 
 # Message status
 print ('ASIGNACION DE ALIASES EN LOS .bashrc Y CREDITOS..')
@@ -79,7 +79,7 @@ print ('ASIGNACION DE ALIASES EN LOS .bashrc Y CREDITOS..')
 
 
 os.system('mkdir -p /opt/tarea3/scripts')
-os.system('cp /root/random/scripts/attack /tmp/')
+os.system('cp /root/random/scripts/attack /tmp/script/')
 
 # Fortune
 # os.system('cp ../robot/fortunes/* /usr/share/games/fortunes')
