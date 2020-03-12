@@ -81,6 +81,9 @@ DIR=$(pwd)
 # Logos
 ASCII=$DIR/ascii
 
+# Uganda
+UGANDA_ASCII=$ASCII/uganda.ascii
+
 ####################################################################################################
 
 ### Funciones ###
@@ -118,10 +121,11 @@ function trapear {
 trapear
 
 clear
+echo -e "${bold}$(cat $UGANDA_ASCII)${NC}" | pv -qL2222
+sleep 0.5
 
 while [ "$lastCODE" != "F-EAS" ]
 do
-    clear
     echo -en "$PROMPT "
     echo -e "${bold}!@#$%^&*()_+" | pv -qL30
     sleep 0.5

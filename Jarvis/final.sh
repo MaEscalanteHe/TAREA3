@@ -83,6 +83,9 @@ DIR=$(pwd)
 # Logos
 ASCII=$DIR/ascii
 
+# Space Invader
+SPACEINVADER_ASCII=$ASCII/spaceinvader.ascii
+
 ####################################################################################################
 
 ### Funciones ###
@@ -120,6 +123,8 @@ function trapear {
 trapear
 
 clear
+echo -e "${bold}$(cat $SPACEINVADER_ASCII)${NC}" | pv -qL2222 | lolcat
+sleep 0.5
 
 echo -en "$PROMPT "
 echo -e "${bold}¡¿3N53R10 P13N54N QU3 9U3D3N C0NTR4 M1?!${NC}" | pv -qL10
@@ -140,7 +145,8 @@ do
     read SIGNAL
     if [ "$SIGNAL" == "instakill" ]
     then
-        kill -9 $PID
+        sudo pkill -9 mplayer
+        break
     fi
 done
 

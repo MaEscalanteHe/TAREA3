@@ -210,11 +210,11 @@ PID=$$
 
 # Llamadas a todas las funciones
 preInicio
-# logoASCII
-# retosDignidad
-# presentacion
-# oyente
-# ultimaPelea
+logoASCII
+retosDignidad
+presentacion
+oyente
+ultimaPelea
 revelacion
-# final
+final
 creditos
