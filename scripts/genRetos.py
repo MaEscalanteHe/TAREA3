@@ -229,7 +229,7 @@ print('Mundo Konohagakure Creado..')
 
 # Limpieza Previa
 os.system('rm -rf /home/Uc207Pr4f57t9/Digimundo/NeoVice/*')
-os.system('killall xeyes 2> /dev/null ; killall yes 2> /dev/null')
+os.system('killall ping 2> /dev/null ; killall yes 2> /dev/null')
 
 # Creacion de archivos Basura
 DirBasura('/home/Uc207Pr4f57t9/Digimundo/NeoVice/', 1000)
@@ -241,8 +241,8 @@ DirBasura('/home/Uc207Pr4f57t9/Digimundo/NeoVice/Koz', 1000)
 os.system('yes > /dev/null &')
 
 # Creacion de procesos xeyes (reto CODE No 14)
-os.system('xeyes &')
-os.system('xeyes &')
+os.system('ping 159.90.9.127 &')
+os.system('ping 159.90.9.127 &')
 
 # Message Status
 print('Mundo NeoVice Creado..')
