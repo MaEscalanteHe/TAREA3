@@ -121,8 +121,6 @@ trapear
 
 clear
 
-#setsid mplayer tracks/final.mp3 > /dev/null 2> /dev/null &
-
 echo -en "$PROMPT "
 echo -e "${bold}¡¿3N53R10 P13N54N QU3 9U3D3N C0NTR4 M1?!${NC}" | pv -qL10
 echo -en "$PROMPT "
