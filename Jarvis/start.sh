@@ -188,6 +188,7 @@ function final {
 
 # Función que se encarga de mostrar los creditos.
 function creditos {
+    sleep 5
     echo -e "$(cat $CREDITOS_ASCII)" | pv -qL250 | lolcat
     # echo -e "${bold}$(cat $CREDITOS_ASCII)" | pv -qL1000
     sleep 20

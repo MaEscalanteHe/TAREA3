@@ -66,7 +66,7 @@ print ('CREANDO CARPETAS DE MUNDOS..')
 
 #Asignacion de aliases
 os.system("echo \"alias ls='ls --color'\" >> /home/Uc207Pr4f57t9/.bashrc")
-os.system('mkdir /home/preparador/admision/ && cp ../credits/credits.py /home/preparador/admision/')
+# os.system('mkdir /home/preparador/admision/ && cp ../credits/credits.py /home/preparador/admision/')
 os.system("echo \"alias instakilleas='python3 /home/preparador/admision/credits.py'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system('echo "alias kill=\'sudo kill\'\" >> /home/Uc207Pr4f57t9/.bashrc')
 os.system('echo \'export PATH=$PATH/tmp/attack\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
