@@ -43,6 +43,7 @@ os.system('echo "EAS ALL=NOPASSWD: /bin/chown" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /bin/touch" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /bin/mkdir" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /home/EAS/Jarvis/start.sh" >> /etc/sudoers')
+os.system('echo "EAS ALL=NOPASSWD: /home/EAS/Jarvis/EAS.sh" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /usr/bin/mplayer" >> /etc/sudoers')
 
 
