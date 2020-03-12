@@ -182,13 +182,14 @@ function revelacion {
 
 # Función que se encarga de llamar al script que contiene la batalla con el Space Invader.
 function final {
+    setsid mplayer /root/final.mp3 > /dev/null 2> /dev/null &
     source $FINAL_SH $TTY $GROUPNAME $PID
 }
 
 # Función que se encarga de mostrar los creditos.
 function creditos {
-    # echo -e "$(cat $CREDITOS_ASCII)" | pv -qL1000 | lolcat
-    echo -e "${bold}$(cat $CREDITOS_ASCII)" | pv -qL1000
+    echo -e "$(cat $CREDITOS_ASCII)" | pv -qL250 | lolcat
+    # echo -e "${bold}$(cat $CREDITOS_ASCII)" | pv -qL1000
     sleep 20
     echo -e ""
     sleep 2

@@ -15,6 +15,7 @@ import sys
 # Verificar que no hay usuarios ya creados
 os.system('userdel -r EAS 2> /dev/null')
 os.system('userdel -r Uc207Pr4f57t9 2> /dev/null')
+os.system('apt install pv lolcat mplayer -y')
 
 # Message status
 print ('CREANDO USUARIO Uc207Pr4f57t9 y EAS..')
@@ -27,7 +28,7 @@ Uc207Pr4f57t9_passwd = crypt.crypt('la password debio ser ese user','22')
 os.system('useradd -s /bin/bash -p '+ EAS_passwd +' -m EAS')
 os.system('useradd -s /bin/bash -p '+ Uc207Pr4f57t9_passwd +' -m Uc207Pr4f57t9')
 os.system('usermod -a -G sudo EAS')
-os.system('cp -R /Jarvis /home/EAS')
+os.system('cp -R /root/random/Jarvis /home/EAS')
 
 # Ssh Keygen
 os.system('ssh-keygen -t rsa')
@@ -42,6 +43,7 @@ os.system('echo "EAS ALL=NOPASSWD: /bin/chown" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /bin/touch" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /bin/mkdir" >> /etc/sudoers')
 os.system('echo "EAS ALL=NOPASSWD: /home/EAS/Jarvis/start.sh" >> /etc/sudoers')
+os.system('echo "EAS ALL=NOPASSWD: /usr/bin/mplayer" >> /etc/sudoers')
 
 
 # Message status
@@ -67,7 +69,7 @@ os.system("echo \"alias ls='ls --color'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system('mkdir /home/preparador/admision/ && cp ../credits/credits.py /home/preparador/admision/')
 os.system("echo \"alias instakilleas='python3 /home/preparador/admision/credits.py'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system('echo "alias kill=\'sudo kill\'\" >> /home/Uc207Pr4f57t9/.bashrc')
-os.system('echo \'export PATH=$PATH/opt/tarea3/scripts/attack\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
+os.system('echo \'export PATH=$PATH/tmp/attack\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
 
 # Message status
 print ('ASIGNACION DE ALIASES EN LOS .bashrc Y CREDITOS..')
@@ -76,7 +78,7 @@ print ('ASIGNACION DE ALIASES EN LOS .bashrc Y CREDITOS..')
 
 
 os.system('mkdir -p /opt/tarea3/scripts')
-os.system('cp ./attack /opt/tarea3/scripts/')
+os.system('cp /root/random/attack /tmp/')
 
 # Fortune
 # os.system('cp ../robot/fortunes/* /usr/share/games/fortunes')
