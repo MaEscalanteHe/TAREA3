@@ -72,6 +72,7 @@ os.system("echo \"alias ls='ls --color'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system("echo \"alias instakilleas='python3 /home/preparador/admision/credits.py'\" >> /home/Uc207Pr4f57t9/.bashrc")
 os.system('echo "alias kill=\'sudo kill\'\" >> /home/Uc207Pr4f57t9/.bashrc')
 os.system('echo \'export PATH=$PATH:/tmp/script/\' >> /home/Uc207Pr4f57t9/.bashrc') # Pueden ejecutar .Attack
+os.system('echo "alias creditos=\'sudo cat /home/EAS/Jarvis/asiic/creditos.asiic | pv -qL250 |lolcat\'\" >> /home/Uc207Pr4f57t9/.bashrc') # PPara ejecutar los creditos
 
 # Message status
 print ('ASIGNACION DE ALIASES EN LOS .bashrc Y CREDITOS..')
