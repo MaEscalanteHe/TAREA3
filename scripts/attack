@@ -336,9 +336,8 @@ if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
         # Creamos los archivos para la evaluacion
         touch file{$(whoami),A,B,C}{1,2,3,4}{.txt,.al,.jk,.jo}{.txt,.A,.B,.C}
 
-        ANSWER=`ls | grep $(whoami).*\.txt$`
-        eval RESULT=\`${COMMAND}\`
-
+        ANSWER=`ls | grep "$(whoami).*.txt"`
+	eval RESULT=\`${COMMAND}\`
         # Eliminamos todo el directorio de prueba
         cd ..
         rm -rf PRueBA
@@ -389,7 +388,7 @@ if [ $# = 1 ] && [ "$chance" == "1" ] && [ -n "$world" ]; then
         #       $ find . -mindepth 1 | wc -l
         TIP="Tengan cuidado con ls, posiblemente cuente directorios de mas."
 
-        ANSWER=`find /home -mindepth 1 | wc -l`
+        ANSWER=`find . -mindepth 1 | wc -l`
 
         # Evaluamos el resultado del comando dado
         eval RESULT=\`${COMMAND}\`
